@@ -17,6 +17,30 @@ var win2 = Titanium.UI.createWindow({
 	modal: true
 });
 
+var win3 = Titanium.UI.createWindow({
+	title : 'Ile kosztuje transport?',
+	backgroundImage : 'images/background.jpg',
+	keepScreenOn: true,
+});
+
+var cargoButton = Ti.UI.createButton({
+	borderStyle : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	title : 'A ile kosztuje transport?',
+	font : {
+		fontSize : 31,
+		fontFamily : 'Helvetica Neue'
+	},
+	textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width : 450,
+	height : 100,
+	top : 800,
+	right: 30
+});
+
+var cargo = Ti.UI.createWebView({
+	url:'http://www.cargorouter.com'
+	});
+
 var tytul = Titanium.UI.createLabel({
 	color : "#000",
 	font : {
@@ -309,9 +333,17 @@ buttonKraj.addEventListener("click", function() {
 	kraj.value = "";
 });
 
+cargoButton.addEventListener('click', function() {
+	win3.add(cargo);
+	win3.open();
+	cargo.evalJS("document.getElementById('DISPtxt').value = Delhi;");
+	cargo.evalJS("document.getElementById('DESTtxt').value = Warsaw;");
+});
+
 win1.add(buttonSkanuj);
 win1.add(buttonKraj);
 win1.add(kraj);
 win1.add(tytul);
+win2.add(cargoButton);
 win1.open();
 
